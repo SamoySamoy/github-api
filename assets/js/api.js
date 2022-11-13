@@ -1,13 +1,16 @@
 const form = document.getElementById("search-form");
-const searchButton = document.getElementsByClassName("main-button");
-const input = document.getElementsByClassName("searchText");
-const repoReleaseList = document.getElementsById("repoData");
+const searchButton = document.getElementById("api-button-release");
+const input = document.getElementById("searchText");
+const commits = document.getElementById("comparedCommit");
+const releaseSelect1 = document.getElementById("release1");
+const releaseSelect2 = document.getElementById("release2");
 
 // fetch repo releases
-function requestRepoReleases(repo) {
+// accepted repo url sample: https://github.com/facebook/create-react-app
+function requestRepoReleases(repoUrl) {
   // create a variable to hold the `Promise` returned from `fetch`
-  // accepted repo url sample: https://github.com/facebook/create-react-app
-  const ownerAndRepo = repo.slice(19).split("/");
+  const ownerAndRepo = repoUrl.slice(19).split("/");
+  console.log("Fetching releases...");
   return Promise.resolve(
     fetch(
       `https://api.github.com/repos/${ownerAndRepo[0]}/${ownerAndRepo[1]}/releases?per_page=100`
@@ -15,27 +18,68 @@ function requestRepoReleases(repo) {
   );
 }
 
-form.addEventListener("submit", e => {
-  e.preventDefault();
+function requestCommits(repoUrl, base, head) {
+  // create a variable to hold the `Promise` returned from `fetch`
+  const ownerAndRepo = repoUrl.slice(19).split("/");
+  console.log("Fetching commits between two selected releases...");
+  return Promise.resolve(
+    fetch(
+      `https://api.github.com/repos/${ownerAndRepo[0]}/${ownerAndRepo[1]}/compare/${base}...${head}`
+    )
+  );
+}
+
+
+searchButton.addEventListener("click", (e) => {
+  console.log("click event success!!!");
   const repoLink = input.value;
-  requestRepoReleases(repoLink)
-    .then((result) => result.json())
-    .then((data) => {
-      if (data.message === "Not Found") {
-        let li = document.createElement("li");
-        li.innerHTML = `Repo not found, please check your link again`;
-        repoReleaseList.appendChild(li);
-      } else {
-        for (let index in data) {
-          let li = document.createElement("li");
-          let content = `
-          <p><strong>Release:</strong> ${data[index].name}</p>
-          <p><strong>Published:</strong> ${data[index].published_at}</p>
-          <p><strong>URL:</strong> <a href="${data[index].html_url}">${data[index].html_url}</a></p>
-      `;
-          li.innerHTML = content;
-          repoReleaseList.appendChild(li);
+  if (releaseSelect1.childElementCount === 0) {
+    // fetch releases from github api
+    requestRepoReleases(repoLink)
+      .then((result) => result.json())
+      .then((data) => {
+        if (data.message === "Not Found") {
+          console.log("Fetching failed???");
+          alert("Your repo's URL is incorrect, please check again!");
+        } else {
+          console.log("Fetching success!!!");
+          const options = data.map((tag) => `<option>${tag.tag_name}</option>`);
+          releaseSelect1.innerHTML = options;
+          releaseSelect2.innerHTML = options;
         }
-      }
-    });
+      });
+  } else {
+    // fetch commits between two releases
+    requestCommits(repoLink, releaseSelect1.value, releaseSelect2.value)
+      .then((result) => result.json())
+      .then((data) => {
+        if (data.message === "Not Found") {
+          console.log("Fetching failed???");
+          alert("Maybe you choose same releases, please check again!");
+        } else {
+          let id = 0;
+          let head = `<tr>
+            <th>STT</th>
+            <th>message</th>
+            <th>commiter</th>
+        </tr>`;
+          let row = [];
+          row.push(head);
+          const commitsRaw = data.commits;
+          let content = commitsRaw.map(
+            (commit) =>
+              `
+              <tr>
+                  <td>${++id}</td>
+                  <td>${commit.commit.message}</td>
+                  <td>${commit.commit.committer.name}</td>
+              </tr>
+          `
+          );
+          row.push(content);
+          commits.innerHTML = row.join("");
+          cour;
+        }
+      });
+  }
 });
