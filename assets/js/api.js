@@ -18,6 +18,7 @@ function requestRepoReleases(repoUrl) {
   );
 }
 
+// fetch commits between 2 releases
 function requestCommits(repoUrl, base, head) {
   // create a variable to hold the `Promise` returned from `fetch`
   const ownerAndRepo = repoUrl.slice(19).split("/");
@@ -29,7 +30,7 @@ function requestCommits(repoUrl, base, head) {
   );
 }
 
-
+// dislay data when click button
 searchButton.addEventListener("click", (e) => {
   console.log("click event success!!!");
   const repoLink = input.value;
@@ -58,27 +59,30 @@ searchButton.addEventListener("click", (e) => {
           alert("Maybe you choose same releases, please check again!");
         } else {
           let id = 0;
-          let head = `<tr>
-            <th>STT</th>
-            <th>message</th>
-            <th>commiter</th>
-        </tr>`;
+          const tableTitle = `<thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Log</th>
+            <th scope="col">Commiter</th>
+          </tr>
+        </thead>`;
           let row = [];
-          row.push(head);
+          row.push(tableTitle);
           const commitsRaw = data.commits;
-          let content = commitsRaw.map(
-            (commit) =>
-              `
+          let content = commitsRaw
+            .filter((commit) => commit.commit.committer.name !== "GitHub")
+            .map(
+              (commit) =>
+                `
               <tr>
-                  <td>${++id}</td>
+                  <th scope="row">${id++}</th>
                   <td>${commit.commit.message}</td>
                   <td>${commit.commit.committer.name}</td>
               </tr>
           `
-          );
+            );
           row.push(content);
           commits.innerHTML = row.join("");
-          cour;
         }
       });
   }

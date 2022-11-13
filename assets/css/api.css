@@ -1,36 +1,23 @@
+#api-button-release:hover {
+  background-color: grey;
+}
+
 #comparedCommit {
   margin-top: 5rem;
 }
 
 #comparedCommit tr th:first-child {
-  width: 1%;
-}
-
-#comparedCommit tr:first-child {
-  background-color: yellowgreen;
+  width: 3%;
+  text-align: center;
+  align-items: center;
 }
 
 table,
 th,
 td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 15px;
-}
-
-table {
-  border-spacing: 30px;
-}
-
-tr:nth-child(even) {
-  background-color: rgba(150, 212, 212, 0.4);
-}
-
-th:nth-child(even),
-td:nth-child(even) {
-  background-color: rgba(150, 212, 212, 0.4);
+  border: thin solid;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  empty-cells: hide;
 }
