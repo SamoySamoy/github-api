@@ -20,7 +20,7 @@
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/css/templatemo-plot-listing.css" />
+    <link rel="stylesheet" href="assets/css/template.css" />
     <link rel="stylesheet" href="assets/css/animated.css" />
     <link rel="stylesheet" href="assets/css/owl.css" />
     <link rel="stylesheet" href="assets/css/api.css" />
@@ -29,8 +29,8 @@
     <script defer src="vendor/jquery/jquery.min.js"></script>
     <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/owl-carousel.js"></script>
-    <script defer src="assets/js/animation.js"></script>
     <script defer src="assets/js/imagesloaded.js"></script>
+    <script defer src="assets/js/animation.js"></script>
     <script defer src="assets/js/custom.js"></script>
     <script defer src="assets/js/api.js"></script>
   </head>
@@ -60,17 +60,17 @@
           <div class="col-12">
             <nav class="main-nav">
               <!-- ***** Logo Start ***** -->
-              <a href="index.html" class="logo"> </a>
+              <a href="index.html" class="logo"></a>
               <!-- ***** Logo End ***** -->
               <!-- ***** Menu Start ***** -->
               <ul class="nav">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="category.html">Category</a></li>
-                <li><a href="listing.html">Listing</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="">DOCS</a></li>
+                <li><a href="">API</a></li>
+                <li><a href="">Others</a></li>
                 <li>
                   <div class="main-white-button">
-                    <a href="#"><i class="fa fa-plus"></i> Contact me</a>
+                    <a href="#contact"><i class="fa fa-plus"></i>Contact me</a>
                   </div>
                 </li>
               </ul>
@@ -85,6 +85,7 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
+    <!-- ***** API Area Start ***** -->
     <div class="main-banner">
       <div class="container">
         <div class="row">
@@ -100,11 +101,8 @@
                 <div class="col-lg-3 align-self-center">
                   <fieldset>
                     <select
-                      name="area"
                       class="form-select"
                       id="release1"
-                      aria-label="Area"
-                      id="chooseRelease1"
                       onchange="this.form.click()"
                     ></select>
                   </fieldset>
@@ -113,7 +111,6 @@
                   <fieldset>
                     <input
                       type="text"
-                      name="address"
                       id="searchText"
                       placeholder="Enter repo link"
                       required
@@ -124,18 +121,16 @@
                 <div class="col-lg-3 align-self-center">
                   <fieldset>
                     <select
-                      name="price"
                       class="form-select"
                       id="release2"
                       aria-label="Default select example"
-                      id="chooseRelease2"
                       onchange="this.form.click()"
                     ></select>
                   </fieldset>
                 </div>
                 <div class="col-lg-3">
                   <fieldset>
-                    <button id="api-button-release" type="button">
+                    <button id="api-button-release" type="submit">
                       <i class="fa fa-search"></i> Search/Compare
                     </button>
                   </fieldset>
@@ -143,79 +138,36 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-10 offset-lg-1">
-            <ul class="categories">
-              <li>
-                <a href="category.html"
-                  ><span class="icon"
-                    ><img src="assets/images/search-icon-01.png" alt="Home"
-                  /></span>
-                  Apartments</a
-                >
-              </li>
-              <li>
-                <a href="listing.html"
-                  ><span class="icon"
-                    ><img src="assets/images/search-icon-02.png" alt="Food"
-                  /></span>
-                  Food &amp; Life</a
-                >
-              </li>
-              <li>
-                <a href="#"
-                  ><span class="icon"
-                    ><img src="assets/images/search-icon-03.png" alt="Vehicle"
-                  /></span>
-                  Cars</a
-                >
-              </li>
-              <li>
-                <a href="#"
-                  ><span class="icon"
-                    ><img src="assets/images/search-icon-04.png" alt="Shopping"
-                  /></span>
-                  Shopping</a
-                >
-              </li>
-              <li>
-                <a href="#"
-                  ><span class="icon"
-                    ><img src="assets/images/search-icon-05.png" alt="Travel"
-                  /></span>
-                  Traveling</a
-                >
-              </li>
-            </ul>
-          </div>
         </div>
         <table id="comparedCommit" class="table"></table>
       </div>
     </div>
+    <!-- ***** API Area End ***** -->
 
+    <!-- ***** Footer Area Start ***** -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
             <div class="about">
               <div class="logo">
-                <img src="assets/images/black-logo.png" alt="Plot Listing" />
+                <a href="https://github.com/SamoySamoy"
+                  ><img src="assets/images/samoyed.png" alt="Plot Listing"
+                /></a>
               </div>
               <p>
                 If you consider that
+                <a rel="nofollow" href="" target="_parent">my website</a>
+                is useful, please
+                <a rel="nofollow" href="" target="_blank">support me</a>
+                on
                 <a
                   rel="nofollow"
-                  href="https://templatemo.com/tm-564-plot-listing"
-                  target="_parent"
-                  >Plot Listing template</a
-                >
-                is useful for your website, please
-                <a
-                  rel="nofollow"
-                  href="https://www.paypal.me/templatemo"
+                  href="https://github.com/SamoySamoy"
                   target="_blank"
-                  >support us</a
+                  ><strong>GitHub</strong></a
                 >
-                a little via PayPal.
+                or buy me a coffee.
               </p>
             </div>
           </div>
@@ -243,15 +195,18 @@
             </div>
           </div>
           <div class="col-lg-4">
-            <div class="contact-us">
-              <h4>Contact Us</h4>
-              <p>27th Street of New Town, Digital Villa</p>
+            <div class="contact-us" id="contact">
+              <h4>Address</h4>
+              <p>
+                RD320, E3 Building, 144 Xuan Thuy Street, Cau Giay District, Ha
+                Noi, Vietnam
+              </p>
               <div class="row">
                 <div class="col-lg-6">
-                  <a href="#">010-020-0340</a>
+                  <a href="#">666-666-6666</a>
                 </div>
                 <div class="col-lg-6">
-                  <a href="#">090-080-0760</a>
+                  <a href="#">999-999-9999</a>
                 </div>
               </div>
             </div>
@@ -259,15 +214,8 @@
           <div class="col-lg-12">
             <div class="sub-footer">
               <p>
-                Copyright © 2021 Plot Listing Co., Ltd. All Rights Reserved.
+                Copyright © Lorem ipsum.
                 <br />
-                Design:
-                <a
-                  rel="nofollow"
-                  href="https://templatemo.com"
-                  title="CSS Templates"
-                  >TemplateMo</a
-                >
               </p>
             </div>
           </div>

@@ -276,7 +276,9 @@ header
 }
 
 .header-area .main-nav a.logo {
-  background-image: url(../images/white-logo.png);
+  background-image: url(../images/samoyed.png);
+  background-size: 40%;
+  background-repeat: no-repeat;
   width: 166px;
   height: 58px;
   display: inline-block;
@@ -284,7 +286,9 @@ header
 }
 
 .background-header .main-nav a.logo {
-  background-image: url(../images/black-logo.png);
+  background-image: url(../images/samoyed.png);
+  background-size: 40%;
+  background-repeat: no-repeat;
   width: 164px;
   height: 58px;
   display: inline-block;
@@ -2060,7 +2064,9 @@ responsive
     color: transparent;
   }
   .header-area .main-nav a.logo {
-    background-image: url(../images/black-logo.png);
+    background-image: url(../images/samoyed.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
     float: left;
   }
   .header-area .logo {

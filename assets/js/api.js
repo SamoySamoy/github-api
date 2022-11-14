@@ -31,7 +31,8 @@ function requestCommits(repoUrl, base, head) {
 }
 
 // dislay data when click button
-searchButton.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
+  e.preventDefault
   console.log("click event success!!!");
   const repoLink = input.value;
   if (releaseSelect1.childElementCount === 0) {
@@ -59,7 +60,7 @@ searchButton.addEventListener("click", (e) => {
           alert("Maybe you choose same releases, please check again!");
         } else {
           let id = 0;
-          const tableTitle = `<thead>
+          const thead = `<thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Log</th>
@@ -67,7 +68,7 @@ searchButton.addEventListener("click", (e) => {
           </tr>
         </thead>`;
           let row = [];
-          row.push(tableTitle);
+          row.push(thead);
           const commitsRaw = data.commits;
           let content = commitsRaw
             .filter((commit) => commit.commit.committer.name !== "GitHub")
@@ -81,7 +82,8 @@ searchButton.addEventListener("click", (e) => {
               </tr>
           `
             );
-          row.push(content);
+          let tbody = `<tbody>${content}</tbody>`;
+          row.push(tbody);
           commits.innerHTML = row.join("");
         }
       });
