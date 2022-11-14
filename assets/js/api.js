@@ -32,7 +32,7 @@ function requestCommits(repoUrl, base, head) {
 
 // dislay data when click button
 form.addEventListener("submit", (e) => {
-  e.preventDefault
+  e.preventDefault();
   console.log("click event success!!!");
   const repoLink = input.value;
   if (releaseSelect1.childElementCount === 0) {
