@@ -1,7 +1,7 @@
 const form = document.getElementById("search-form");
 const searchButton = document.getElementById("api-button-release");
 const input = document.getElementById("searchText");
-const commits = document.getElementById("comparedCommit");
+const commits = document.getElementById("showData");
 const releaseSelect1 = document.getElementById("release1");
 const releaseSelect2 = document.getElementById("release2");
 
@@ -32,7 +32,7 @@ function requestCommits(repoUrl, base, head) {
 
 // dislay data when click button
 form.addEventListener("submit", (e) => {
-  e.preventDefault
+  e.preventDefault();
   console.log("click event success!!!");
   const repoLink = input.value;
   if (releaseSelect1.childElementCount === 0) {
@@ -59,17 +59,33 @@ form.addEventListener("submit", (e) => {
           console.log("Fetching failed???");
           alert("Maybe you choose same releases, please check again!");
         } else {
-          let id = 0;
-          const thead = `<thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Log</th>
-            <th scope="col">Commiter</th>
-          </tr>
-        </thead>`;
-          let row = [];
-          row.push(thead);
-          const commitsRaw = data.commits;
+          let col = [];
+          for (let i = 0; i < data.commit.length; i++) {
+            for (let key in myBooks[i]) {
+              if (col.indexOf(key) === -1) {
+                col.push(key);
+              }
+            }
+          }
+          const table = document.createElement("table");
+          // Create table header row using the extracted headers above.
+          let tr = table.insertRow(-1); // table row.
+          for (let i = 0; i < col.length; i++) {
+            let th = document.createElement("th"); // table header.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+          }
+
+          // add json data to the table as rows.
+          for (let i = 0; i < data.commit.length; i++) {
+            tr = table.insertRow(-1);
+            for (let j = 0; j < col.length; j++) {
+              let tabCell = tr.insertCell(-1);
+              tabCell.innerHTML = data.commit[i][col[j]];
+            }
+          }
+          commits.innerHTML = "";
+          commits.appendChild(table);
           let content = commitsRaw
             .filter((commit) => commit.commit.committer.name !== "GitHub")
             .map(
