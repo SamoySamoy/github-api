@@ -1,7 +1,7 @@
 const form = document.getElementById("search-form");
 const searchButton = document.getElementById("api-button-release");
 const input = document.getElementById("searchText");
-const commits = document.getElementById("comparedCommit");
+const commits = document.getElementById("showData");
 const releaseSelect1 = document.getElementById("release1");
 const releaseSelect2 = document.getElementById("release2");
 
@@ -32,7 +32,7 @@ function requestCommits(repoUrl, base, head) {
 
 // dislay data when click button
 form.addEventListener("submit", (e) => {
-  e.preventDefault
+  e.preventDefault();
   console.log("click event success!!!");
   const repoLink = input.value;
   if (releaseSelect1.childElementCount === 0) {
@@ -59,32 +59,36 @@ form.addEventListener("submit", (e) => {
           console.log("Fetching failed???");
           alert("Maybe you choose same releases, please check again!");
         } else {
-          let id = 0;
-          const thead = `<thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Log</th>
-            <th scope="col">Commiter</th>
-          </tr>
-        </thead>`;
-          let row = [];
-          row.push(thead);
-          const commitsRaw = data.commits;
-          let content = commitsRaw
-            .filter((commit) => commit.commit.committer.name !== "GitHub")
-            .map(
-              (commit) =>
-                `
-              <tr>
-                  <th scope="row">${id++}</th>
-                  <td>${commit.commit.message}</td>
-                  <td>${commit.commit.committer.name}</td>
-              </tr>
-          `
-            );
-          let tbody = `<tbody>${content}</tbody>`;
-          row.push(tbody);
-          commits.innerHTML = row.join("");
+          let content = data.commits.filter(
+            (commit) => commit.commit.committer.name !== "GitHub"
+          );
+          // Extract value from table header.
+          let col = ["#", "Log", "Committer"];
+
+          // Create a table.
+          const table = document.createElement("table");
+
+          // Create table header row using the extracted headers above.
+          let tr = table.insertRow(-1); // table row.
+
+          for (let i = 0; i < col.length; i++) {
+            let th = document.createElement("th"); // table header.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+          }
+          // add json data to the table as rows.
+          for (let i = 0; i < content.length; i++) {
+            tr = table.insertRow(-1);
+            let id = tr.insertCell(-1);
+            id.innerHTML = `${i + 1}`;
+            let log = tr.insertCell(-1);
+            log.innerHTML = content[i].commit.message;
+            let committer = tr.insertCell(-1);
+            committer.innerHTML = content[i].commit.committer.name;
+          }
+
+          commits.innerHTML = "";
+          commits.appendChild(table);
         }
       });
   }

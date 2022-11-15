@@ -2,11 +2,11 @@
   background-color: grey;
 }
 
-#comparedCommit {
+#showData {
   margin-top: 5rem;
 }
 
-#comparedCommit tr th:first-child {
+#showData tr th:first-child {
   width: 3%;
   text-align: center;
   align-items: center;
