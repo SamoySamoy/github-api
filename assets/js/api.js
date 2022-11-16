@@ -87,7 +87,7 @@ form.addEventListener("submit", (e) => {
             let id = tr.insertCell(-1);
             id.innerHTML = `${i + 1}`;
             let log = tr.insertCell(-1);
-            log.innerHTML = `<a href=${content[i].commit.url}>${content[i].commit.message}</a>`;
+            log.innerHTML = content[i].commit.message;
             let committer = tr.insertCell(-1);
             committer.innerHTML = content[i].commit.committer.name;
             let date = tr.insertCell(-1);
