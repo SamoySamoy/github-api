@@ -21,3 +21,15 @@ td {
   text-align: center;
   empty-cells: hide;
 }
+
+table {
+  width: 100%;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: black;
+}
